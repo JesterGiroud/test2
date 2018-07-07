@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cskaoyan.bean">
+  <class name="Order" table="t_order" dynamic-insert="true"
+         dynamic-update="true">
+      <id name="oid" column="oid">
+          <generator class="native"/>
+      </id>
+      <property name="ordertime" column="ordertime" type="time" ></property>
+      <property name="receiver" column="receiver" ></property>
+      <property name="address" column="address" ></property>
+      <property name="money" column="money" type="float"></property>
+
+      <!--对于表来说，还差外键-->
+      <!--many to  one 多对一 站在order的角度，跟user就是多对一的关系-->
+      <!--对应的order表 一应该有一个外键，表示order关联的user-->
+      <!--name表示多方引用一方的变量名
+          class是一方改变量的类型
+          column是数据库在生成多对一关系的时候的外键列名-->
+      <many-to-one name="user"  class="User"  column="uid"/>
+
+  </class>
+</hibernate-mapping>

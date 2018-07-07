@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cskaoyan.bean">
+  <class name="User" table="t_user" dynamic-insert="true" dynamic-update="true">
+      <id name="id" column="id">
+          <generator class="native"/>
+      </id>
+      <property name="username" column="username"  ></property>
+      <property name="email" column="email"></property>
+      <property name="password" column="password"></property>
+
+      <!--一的一方user，关联了多个order，放在一个set里-->
+      <!--一个user里的order集合
+           name 集合的名字
+           table 去查的多方的表名
+           key 是用我的主键去查多方表的外键列名
+           one-to-many 当前的实体 跟另一个实体是一对多的关系。
+           class是集合里每一个成员的类型
+           -->
+      <set name="orders"  table="t_order">
+          <key column="uid"></key>
+          <one-to-many class="Order"></one-to-many>
+      </set>
+
+  </class>
+</hibernate-mapping>
